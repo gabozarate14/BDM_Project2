@@ -1,0 +1,439 @@
+"Any","Codi_Districte","Nom_Districte","Codi_Barri","Nom_Barri","Preu_mitja_habitatge","Valor"
+2017,1,"Ciutat Vella",1,"el Raval","Total. Milers d'euros",240.3
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Total. Milers d'euros",472.7
+2017,1,"Ciutat Vella",3,"la Barceloneta","Total. Milers d'euros",197.7
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Total. Milers d'euros",314.3
+2017,2,"Eixample",5,"el Fort Pienc","Total. Milers d'euros",400.4
+2017,2,"Eixample",6,"la Sagrada Família","Total. Milers d'euros",255.8
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Total. Milers d'euros",519.8
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Total. Milers d'euros",372.2
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Total. Milers d'euros",339.6
+2017,2,"Eixample",10,"Sant Antoni","Total. Milers d'euros",297.9
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Total. Milers d'euros",260.5
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Total. Milers d'euros",99.1
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Total. Milers d'euros",166.3
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Total. Milers d'euros",235.1
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Total. Milers d'euros",263.3
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Total. Milers d'euros",288.1
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Total. Milers d'euros",251.5
+2017,3,"Sants-Montjuïc",18,"Sants","Total. Milers d'euros",338.3
+2017,4,"Les Corts",19,"les Corts","Total. Milers d'euros",417.3
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Total. Milers d'euros",369.9
+2017,4,"Les Corts",21,"Pedralbes","Total. Milers d'euros",890
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Total. Milers d'euros",391.3
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Total. Milers d'euros",690.1
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Total. Milers d'euros",805.7
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Total. Milers d'euros",612.3
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Total. Milers d'euros",583.6
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Total. Milers d'euros",523.2
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Total. Milers d'euros",337.2
+2017,6,"Gràcia",29,"el Coll","Total. Milers d'euros",205.8
+2017,6,"Gràcia",30,"la Salut","Total. Milers d'euros",310.9
+2017,6,"Gràcia",31,"la Vila de Gràcia","Total. Milers d'euros",432.2
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Total. Milers d'euros",362.5
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Total. Milers d'euros",272.5
+2017,7,"Horta-Guinardó",34,"Can Baró","Total. Milers d'euros",221.3
+2017,7,"Horta-Guinardó",35,"el Guinardó","Total. Milers d'euros",202.2
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Total. Milers d'euros",277.3
+2017,7,"Horta-Guinardó",37,"el Carmel","Total. Milers d'euros",144.6
+2017,7,"Horta-Guinardó",38,"la Teixonera","Total. Milers d'euros",144
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Total. Milers d'euros",157.6
+2017,7,"Horta-Guinardó",40,"Montbau","Total. Milers d'euros",140.8
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Total. Milers d'euros",210.4
+2017,7,"Horta-Guinardó",42,"la Clota","Total. Milers d'euros",NA
+2017,7,"Horta-Guinardó",43,"Horta","Total. Milers d'euros",192.9
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Total. Milers d'euros",172.5
+2017,8,"Nou Barris",45,"Porta","Total. Milers d'euros",171
+2017,8,"Nou Barris",46,"el Turó de la Peira","Total. Milers d'euros",107.8
+2017,8,"Nou Barris",47,"Can Peguera","Total. Milers d'euros",114.4
+2017,8,"Nou Barris",48,"la Guineueta","Total. Milers d'euros",175
+2017,8,"Nou Barris",49,"Canyelles","Total. Milers d'euros",128.6
+2017,8,"Nou Barris",50,"les Roquetes","Total. Milers d'euros",106.7
+2017,8,"Nou Barris",51,"Verdun","Total. Milers d'euros",116.8
+2017,8,"Nou Barris",52,"la Prosperitat","Total. Milers d'euros",132
+2017,8,"Nou Barris",53,"la Trinitat Nova","Total. Milers d'euros",73.6
+2017,8,"Nou Barris",54,"Torre Baró","Total. Milers d'euros",97
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Total. Milers d'euros",77.1
+2017,8,"Nou Barris",56,"Vallbona","Total. Milers d'euros",176.5
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Total. Milers d'euros",142.3
+2017,9,"Sant Andreu",58,"Baró de Viver","Total. Milers d'euros",265
+2017,9,"Sant Andreu",59,"el Bon Pastor","Total. Milers d'euros",144.4
+2017,9,"Sant Andreu",60,"Sant Andreu","Total. Milers d'euros",212
+2017,9,"Sant Andreu",61,"la Sagrera","Total. Milers d'euros",231.6
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Total. Milers d'euros",189.5
+2017,9,"Sant Andreu",63,"Navas","Total. Milers d'euros",350.3
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Total. Milers d'euros",341.8
+2017,10,"Sant Martí",65,"el Clot","Total. Milers d'euros",348.2
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Total. Milers d'euros",289.8
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Total. Milers d'euros",492.1
+2017,10,"Sant Martí",68,"el Poblenou","Total. Milers d'euros",337.9
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Total. Milers d'euros",672.5
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Total. Milers d'euros",215.9
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Total. Milers d'euros",342.3
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Total. Milers d'euros",271.4
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Total. Milers d'euros",138.3
+2017,1,"Ciutat Vella",1,"el Raval","Nou. Milers d'euros",292.5
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Nou. Milers d'euros",799.5
+2017,1,"Ciutat Vella",3,"la Barceloneta","Nou. Milers d'euros",192.8
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Nou. Milers d'euros",375.8
+2017,2,"Eixample",5,"el Fort Pienc","Nou. Milers d'euros",507.5
+2017,2,"Eixample",6,"la Sagrada Família","Nou. Milers d'euros",NA
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Nou. Milers d'euros",257.7
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Nou. Milers d'euros",478.7
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Nou. Milers d'euros",431.9
+2017,2,"Eixample",10,"Sant Antoni","Nou. Milers d'euros",NA
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Nou. Milers d'euros",307
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Nou. Milers d'euros",NA
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Nou. Milers d'euros",NA
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Nou. Milers d'euros",NA
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Nou. Milers d'euros",NA
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Nou. Milers d'euros",300.4
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Nou. Milers d'euros",323.5
+2017,3,"Sants-Montjuïc",18,"Sants","Nou. Milers d'euros",230
+2017,4,"Les Corts",19,"les Corts","Nou. Milers d'euros",669.8
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Nou. Milers d'euros",NA
+2017,4,"Les Corts",21,"Pedralbes","Nou. Milers d'euros",NA
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Nou. Milers d'euros",NA
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Nou. Milers d'euros",NA
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Nou. Milers d'euros",634.8
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Nou. Milers d'euros",474.7
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Nou. Milers d'euros",593.3
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Nou. Milers d'euros",467.5
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Nou. Milers d'euros",350.7
+2017,6,"Gràcia",29,"el Coll","Nou. Milers d'euros",228.7
+2017,6,"Gràcia",30,"la Salut","Nou. Milers d'euros",225
+2017,6,"Gràcia",31,"la Vila de Gràcia","Nou. Milers d'euros",483.2
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Nou. Milers d'euros",335
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Nou. Milers d'euros",385.6
+2017,7,"Horta-Guinardó",34,"Can Baró","Nou. Milers d'euros",NA
+2017,7,"Horta-Guinardó",35,"el Guinardó","Nou. Milers d'euros",NA
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Nou. Milers d'euros",274.6
+2017,7,"Horta-Guinardó",37,"el Carmel","Nou. Milers d'euros",135.7
+2017,7,"Horta-Guinardó",38,"la Teixonera","Nou. Milers d'euros",149.8
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Nou. Milers d'euros",234.2
+2017,7,"Horta-Guinardó",40,"Montbau","Nou. Milers d'euros",141
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Nou. Milers d'euros",175
+2017,7,"Horta-Guinardó",42,"la Clota","Nou. Milers d'euros",NA
+2017,7,"Horta-Guinardó",43,"Horta","Nou. Milers d'euros",205.4
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Nou. Milers d'euros",220
+2017,8,"Nou Barris",45,"Porta","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",46,"el Turó de la Peira","Nou. Milers d'euros",91.8
+2017,8,"Nou Barris",47,"Can Peguera","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",48,"la Guineueta","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",49,"Canyelles","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",50,"les Roquetes","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",51,"Verdun","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",52,"la Prosperitat","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",53,"la Trinitat Nova","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",54,"Torre Baró","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Nou. Milers d'euros",NA
+2017,8,"Nou Barris",56,"Vallbona","Nou. Milers d'euros",NA
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Nou. Milers d'euros",NA
+2017,9,"Sant Andreu",58,"Baró de Viver","Nou. Milers d'euros",NA
+2017,9,"Sant Andreu",59,"el Bon Pastor","Nou. Milers d'euros",106
+2017,9,"Sant Andreu",60,"Sant Andreu","Nou. Milers d'euros",NA
+2017,9,"Sant Andreu",61,"la Sagrera","Nou. Milers d'euros",NA
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Nou. Milers d'euros",316
+2017,9,"Sant Andreu",63,"Navas","Nou. Milers d'euros",289.4
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Nou. Milers d'euros",420.4
+2017,10,"Sant Martí",65,"el Clot","Nou. Milers d'euros",441.3
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Nou. Milers d'euros",NA
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Nou. Milers d'euros",NA
+2017,10,"Sant Martí",68,"el Poblenou","Nou. Milers d'euros",372.2
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Nou. Milers d'euros",250
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Nou. Milers d'euros",167.2
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Nou. Milers d'euros",200.6
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Nou. Milers d'euros",194.8
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Nou. Milers d'euros",134.2
+2017,1,"Ciutat Vella",1,"el Raval","Usat. Milers d'euros",240
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Usat. Milers d'euros",424
+2017,1,"Ciutat Vella",3,"la Barceloneta","Usat. Milers d'euros",198.2
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Usat. Milers d'euros",310.4
+2017,2,"Eixample",5,"el Fort Pienc","Usat. Milers d'euros",383.2
+2017,2,"Eixample",6,"la Sagrada Família","Usat. Milers d'euros",255.8
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Usat. Milers d'euros",535.3
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Usat. Milers d'euros",363.4
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Usat. Milers d'euros",310.2
+2017,2,"Eixample",10,"Sant Antoni","Usat. Milers d'euros",297.9
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Usat. Milers d'euros",258
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Usat. Milers d'euros",99.1
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Usat. Milers d'euros",166.3
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Usat. Milers d'euros",235.1
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Usat. Milers d'euros",263
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Usat. Milers d'euros",222.9
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Usat. Milers d'euros",245.3
+2017,3,"Sants-Montjuïc",18,"Sants","Usat. Milers d'euros",344.4
+2017,4,"Les Corts",19,"les Corts","Usat. Milers d'euros",357.2
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Usat. Milers d'euros",374
+2017,4,"Les Corts",21,"Pedralbes","Usat. Milers d'euros",890
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Usat. Milers d'euros",391.3
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Usat. Milers d'euros",690.2
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Usat. Milers d'euros",816.1
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Usat. Milers d'euros",632.9
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Usat. Milers d'euros",581.7
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Usat. Milers d'euros",527.7
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Usat. Milers d'euros",334
+2017,6,"Gràcia",29,"el Coll","Usat. Milers d'euros",199.3
+2017,6,"Gràcia",30,"la Salut","Usat. Milers d'euros",312.3
+2017,6,"Gràcia",31,"la Vila de Gràcia","Usat. Milers d'euros",429.8
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Usat. Milers d'euros",362.6
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Usat. Milers d'euros",265.1
+2017,7,"Horta-Guinardó",34,"Can Baró","Usat. Milers d'euros",221.3
+2017,7,"Horta-Guinardó",35,"el Guinardó","Usat. Milers d'euros",201.8
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Usat. Milers d'euros",277.7
+2017,7,"Horta-Guinardó",37,"el Carmel","Usat. Milers d'euros",146.9
+2017,7,"Horta-Guinardó",38,"la Teixonera","Usat. Milers d'euros",142.1
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Usat. Milers d'euros",140.6
+2017,7,"Horta-Guinardó",40,"Montbau","Usat. Milers d'euros",140.7
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Usat. Milers d'euros",224.9
+2017,7,"Horta-Guinardó",42,"la Clota","Usat. Milers d'euros",NA
+2017,7,"Horta-Guinardó",43,"Horta","Usat. Milers d'euros",189.6
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Usat. Milers d'euros",170.9
+2017,8,"Nou Barris",45,"Porta","Usat. Milers d'euros",171
+2017,8,"Nou Barris",46,"el Turó de la Peira","Usat. Milers d'euros",112.1
+2017,8,"Nou Barris",47,"Can Peguera","Usat. Milers d'euros",114.4
+2017,8,"Nou Barris",48,"la Guineueta","Usat. Milers d'euros",172.7
+2017,8,"Nou Barris",49,"Canyelles","Usat. Milers d'euros",128.6
+2017,8,"Nou Barris",50,"les Roquetes","Usat. Milers d'euros",106.7
+2017,8,"Nou Barris",51,"Verdun","Usat. Milers d'euros",116.8
+2017,8,"Nou Barris",52,"la Prosperitat","Usat. Milers d'euros",132
+2017,8,"Nou Barris",53,"la Trinitat Nova","Usat. Milers d'euros",73.6
+2017,8,"Nou Barris",54,"Torre Baró","Usat. Milers d'euros",97
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Usat. Milers d'euros",77.1
+2017,8,"Nou Barris",56,"Vallbona","Usat. Milers d'euros",176.5
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Usat. Milers d'euros",142.3
+2017,9,"Sant Andreu",58,"Baró de Viver","Usat. Milers d'euros",265
+2017,9,"Sant Andreu",59,"el Bon Pastor","Usat. Milers d'euros",147.1
+2017,9,"Sant Andreu",60,"Sant Andreu","Usat. Milers d'euros",212.1
+2017,9,"Sant Andreu",61,"la Sagrera","Usat. Milers d'euros",231.6
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Usat. Milers d'euros",186.9
+2017,9,"Sant Andreu",63,"Navas","Usat. Milers d'euros",354.2
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Usat. Milers d'euros",336.3
+2017,10,"Sant Martí",65,"el Clot","Usat. Milers d'euros",322.9
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Usat. Milers d'euros",286.3
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Usat. Milers d'euros",492.1
+2017,10,"Sant Martí",68,"el Poblenou","Usat. Milers d'euros",332.8
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Usat. Milers d'euros",680.2
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Usat. Milers d'euros",221.8
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Usat. Milers d'euros",383.6
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Usat. Milers d'euros",273.3
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Usat. Milers d'euros",138.8
+2017,1,"Ciutat Vella",1,"el Raval","Total. Euros/m2 construït",3469.9
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Total. Euros/m2 construït",4565.8
+2017,1,"Ciutat Vella",3,"la Barceloneta","Total. Euros/m2 construït",4501.1
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Total. Euros/m2 construït",4593.7
+2017,2,"Eixample",5,"el Fort Pienc","Total. Euros/m2 construït",4296.6
+2017,2,"Eixample",6,"la Sagrada Família","Total. Euros/m2 construït",3494.5
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Total. Euros/m2 construït",4628
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Total. Euros/m2 construït",4218.9
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Total. Euros/m2 construït",4519
+2017,2,"Eixample",10,"Sant Antoni","Total. Euros/m2 construït",3322.7
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Total. Euros/m2 construït",3554.6
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Total. Euros/m2 construït",1381.4
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Total. Euros/m2 construït",2497
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Total. Euros/m2 construït",3056.9
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Total. Euros/m2 construït",3276.3
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Total. Euros/m2 construït",3803.9
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Total. Euros/m2 construït",2911.1
+2017,3,"Sants-Montjuïc",18,"Sants","Total. Euros/m2 construït",4683.4
+2017,4,"Les Corts",19,"les Corts","Total. Euros/m2 construït",4737.6
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Total. Euros/m2 construït",4018.5
+2017,4,"Les Corts",21,"Pedralbes","Total. Euros/m2 construït",5290.3
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Total. Euros/m2 construït",2887.9
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Total. Euros/m2 construït",6159.2
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Total. Euros/m2 construït",5649.1
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Total. Euros/m2 construït",5003.2
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Total. Euros/m2 construït",4787.6
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Total. Euros/m2 construït",4839.6
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Total. Euros/m2 construït",3597.2
+2017,6,"Gràcia",29,"el Coll","Total. Euros/m2 construït",2741.6
+2017,6,"Gràcia",30,"la Salut","Total. Euros/m2 construït",3853.7
+2017,6,"Gràcia",31,"la Vila de Gràcia","Total. Euros/m2 construït",4570.6
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Total. Euros/m2 construït",4005
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Total. Euros/m2 construït",3552
+2017,7,"Horta-Guinardó",34,"Can Baró","Total. Euros/m2 construït",2423.7
+2017,7,"Horta-Guinardó",35,"el Guinardó","Total. Euros/m2 construït",2742.6
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Total. Euros/m2 construït",3397.6
+2017,7,"Horta-Guinardó",37,"el Carmel","Total. Euros/m2 construït",2147.3
+2017,7,"Horta-Guinardó",38,"la Teixonera","Total. Euros/m2 construït",2217.4
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Total. Euros/m2 construït",2081
+2017,7,"Horta-Guinardó",40,"Montbau","Total. Euros/m2 construït",2198.8
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Total. Euros/m2 construït",3615.3
+2017,7,"Horta-Guinardó",42,"la Clota","Total. Euros/m2 construït",NA
+2017,7,"Horta-Guinardó",43,"Horta","Total. Euros/m2 construït",2602.4
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Total. Euros/m2 construït",2585.4
+2017,8,"Nou Barris",45,"Porta","Total. Euros/m2 construït",2478.1
+2017,8,"Nou Barris",46,"el Turó de la Peira","Total. Euros/m2 construït",1756.9
+2017,8,"Nou Barris",47,"Can Peguera","Total. Euros/m2 construït",1713.6
+2017,8,"Nou Barris",48,"la Guineueta","Total. Euros/m2 construït",2261.7
+2017,8,"Nou Barris",49,"Canyelles","Total. Euros/m2 construït",1586.9
+2017,8,"Nou Barris",50,"les Roquetes","Total. Euros/m2 construït",1837
+2017,8,"Nou Barris",51,"Verdun","Total. Euros/m2 construït",2023.6
+2017,8,"Nou Barris",52,"la Prosperitat","Total. Euros/m2 construït",2020.1
+2017,8,"Nou Barris",53,"la Trinitat Nova","Total. Euros/m2 construït",1381.7
+2017,8,"Nou Barris",54,"Torre Baró","Total. Euros/m2 construït",1380.5
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Total. Euros/m2 construït",1216.1
+2017,8,"Nou Barris",56,"Vallbona","Total. Euros/m2 construït",2243.7
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Total. Euros/m2 construït",2057.9
+2017,9,"Sant Andreu",58,"Baró de Viver","Total. Euros/m2 construït",2763
+2017,9,"Sant Andreu",59,"el Bon Pastor","Total. Euros/m2 construït",1893.7
+2017,9,"Sant Andreu",60,"Sant Andreu","Total. Euros/m2 construït",2781.2
+2017,9,"Sant Andreu",61,"la Sagrera","Total. Euros/m2 construït",3303.8
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Total. Euros/m2 construït",2709.5
+2017,9,"Sant Andreu",63,"Navas","Total. Euros/m2 construït",3947.2
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Total. Euros/m2 construït",3988.8
+2017,10,"Sant Martí",65,"el Clot","Total. Euros/m2 construït",3605.9
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Total. Euros/m2 construït",3847.4
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Total. Euros/m2 construït",4315.3
+2017,10,"Sant Martí",68,"el Poblenou","Total. Euros/m2 construït",4347.4
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Total. Euros/m2 construït",6951.3
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Total. Euros/m2 construït",2910.9
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Total. Euros/m2 construït",4555.3
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Total. Euros/m2 construït",3325.9
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Total. Euros/m2 construït",2065.7
+2017,1,"Ciutat Vella",1,"el Raval","Nou. Euros/m2 construït",3633.1
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Nou. Euros/m2 construït",5397.4
+2017,1,"Ciutat Vella",3,"la Barceloneta","Nou. Euros/m2 construït",3967.5
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Nou. Euros/m2 construït",5973.2
+2017,2,"Eixample",5,"el Fort Pienc","Nou. Euros/m2 construït",4787.3
+2017,2,"Eixample",6,"la Sagrada Família","Nou. Euros/m2 construït",NA
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Nou. Euros/m2 construït",2878.1
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Nou. Euros/m2 construït",4704.4
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Nou. Euros/m2 construït",6053.1
+2017,2,"Eixample",10,"Sant Antoni","Nou. Euros/m2 construït",NA
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Nou. Euros/m2 construït",4105.7
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Nou. Euros/m2 construït",NA
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Nou. Euros/m2 construït",NA
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Nou. Euros/m2 construït",NA
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Nou. Euros/m2 construït",NA
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Nou. Euros/m2 construït",3962.8
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Nou. Euros/m2 construït",4425.1
+2017,3,"Sants-Montjuïc",18,"Sants","Nou. Euros/m2 construït",3635.4
+2017,4,"Les Corts",19,"les Corts","Nou. Euros/m2 construït",7252.9
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Nou. Euros/m2 construït",NA
+2017,4,"Les Corts",21,"Pedralbes","Nou. Euros/m2 construït",NA
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Nou. Euros/m2 construït",NA
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Nou. Euros/m2 construït",NA
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Nou. Euros/m2 construït",5001.9
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Nou. Euros/m2 construït",4481.2
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Nou. Euros/m2 construït",4736
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Nou. Euros/m2 construït",4040.2
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Nou. Euros/m2 construït",3735.1
+2017,6,"Gràcia",29,"el Coll","Nou. Euros/m2 construït",2817.5
+2017,6,"Gràcia",30,"la Salut","Nou. Euros/m2 construït",3337.4
+2017,6,"Gràcia",31,"la Vila de Gràcia","Nou. Euros/m2 construït",4945.8
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Nou. Euros/m2 construït",2248.2
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Nou. Euros/m2 construït",4065.2
+2017,7,"Horta-Guinardó",34,"Can Baró","Nou. Euros/m2 construït",NA
+2017,7,"Horta-Guinardó",35,"el Guinardó","Nou. Euros/m2 construït",NA
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Nou. Euros/m2 construït",3229.6
+2017,7,"Horta-Guinardó",37,"el Carmel","Nou. Euros/m2 construït",2246.4
+2017,7,"Horta-Guinardó",38,"la Teixonera","Nou. Euros/m2 construït",2394.6
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Nou. Euros/m2 construït",2242.1
+2017,7,"Horta-Guinardó",40,"Montbau","Nou. Euros/m2 construït",2137.6
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Nou. Euros/m2 construït",3384
+2017,7,"Horta-Guinardó",42,"la Clota","Nou. Euros/m2 construït",NA
+2017,7,"Horta-Guinardó",43,"Horta","Nou. Euros/m2 construït",2713.5
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Nou. Euros/m2 construït",3733.8
+2017,8,"Nou Barris",45,"Porta","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",46,"el Turó de la Peira","Nou. Euros/m2 construït",1688.2
+2017,8,"Nou Barris",47,"Can Peguera","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",48,"la Guineueta","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",49,"Canyelles","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",50,"les Roquetes","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",51,"Verdun","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",52,"la Prosperitat","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",53,"la Trinitat Nova","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",54,"Torre Baró","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Nou. Euros/m2 construït",NA
+2017,8,"Nou Barris",56,"Vallbona","Nou. Euros/m2 construït",NA
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Nou. Euros/m2 construït",NA
+2017,9,"Sant Andreu",58,"Baró de Viver","Nou. Euros/m2 construït",NA
+2017,9,"Sant Andreu",59,"el Bon Pastor","Nou. Euros/m2 construït",1289
+2017,9,"Sant Andreu",60,"Sant Andreu","Nou. Euros/m2 construït",NA
+2017,9,"Sant Andreu",61,"la Sagrera","Nou. Euros/m2 construït",NA
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Nou. Euros/m2 construït",4443.3
+2017,9,"Sant Andreu",63,"Navas","Nou. Euros/m2 construït",5144
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Nou. Euros/m2 construït",4871
+2017,10,"Sant Martí",65,"el Clot","Nou. Euros/m2 construït",3305
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Nou. Euros/m2 construït",NA
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Nou. Euros/m2 construït",NA
+2017,10,"Sant Martí",68,"el Poblenou","Nou. Euros/m2 construït",4760.8
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Nou. Euros/m2 construït",3164.6
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Nou. Euros/m2 construït",2581.1
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Nou. Euros/m2 construït",2881.1
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Nou. Euros/m2 construït",3063.3
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Nou. Euros/m2 construït",2417.2
+2017,1,"Ciutat Vella",1,"el Raval","Usat. Euros/m2 construït",3468.9
+2017,1,"Ciutat Vella",2,"el Barri Gòtic","Usat. Euros/m2 construït",4441.9
+2017,1,"Ciutat Vella",3,"la Barceloneta","Usat. Euros/m2 construït",4551.3
+2017,1,"Ciutat Vella",4,"Sant Pere, Santa Caterina i la Ribera","Usat. Euros/m2 construït",4506.9
+2017,2,"Eixample",5,"el Fort Pienc","Usat. Euros/m2 construït",4217.6
+2017,2,"Eixample",6,"la Sagrada Família","Usat. Euros/m2 construït",3494.5
+2017,2,"Eixample",7,"la Dreta de l'Eixample","Usat. Euros/m2 construït",4731
+2017,2,"Eixample",8,"l'Antiga Esquerra de l'Eixample","Usat. Euros/m2 construït",4178.8
+2017,2,"Eixample",9,"la Nova Esquerra de l'Eixample","Usat. Euros/m2 construït",4030.3
+2017,2,"Eixample",10,"Sant Antoni","Usat. Euros/m2 construït",3322.7
+2017,3,"Sants-Montjuïc",11,"el Poble Sec","Usat. Euros/m2 construït",3524.8
+2017,3,"Sants-Montjuïc",12,"la Marina del Prat Vermell","Usat. Euros/m2 construït",1381.4
+2017,3,"Sants-Montjuïc",13,"la Marina de Port","Usat. Euros/m2 construït",2497
+2017,3,"Sants-Montjuïc",14,"la Font de la Guatlla","Usat. Euros/m2 construït",3056.9
+2017,3,"Sants-Montjuïc",15,"Hostafrancs","Usat. Euros/m2 construït",3270.9
+2017,3,"Sants-Montjuïc",16,"la Bordeta","Usat. Euros/m2 construït",2958.9
+2017,3,"Sants-Montjuïc",17,"Sants - Badal","Usat. Euros/m2 construït",2782.2
+2017,3,"Sants-Montjuïc",18,"Sants","Usat. Euros/m2 construït",4743
+2017,4,"Les Corts",19,"les Corts","Usat. Euros/m2 construït",4138.7
+2017,4,"Les Corts",20,"la Maternitat i Sant Ramon","Usat. Euros/m2 construït",3995.1
+2017,4,"Les Corts",21,"Pedralbes","Usat. Euros/m2 construït",5290.3
+2017,5,"Sarrià-Sant Gervasi",22,"Vallvidrera, el Tibidabo i les Planes","Usat. Euros/m2 construït",2887.9
+2017,5,"Sarrià-Sant Gervasi",23,"Sarrià","Usat. Euros/m2 construït",6177.7
+2017,5,"Sarrià-Sant Gervasi",24,"les Tres Torres","Usat. Euros/m2 construït",5688.5
+2017,5,"Sarrià-Sant Gervasi",25,"Sant Gervasi - la Bonanova","Usat. Euros/m2 construït",5081.1
+2017,5,"Sarrià-Sant Gervasi",26,"Sant Gervasi - Galvany","Usat. Euros/m2 construït",4797.6
+2017,5,"Sarrià-Sant Gervasi",27,"el Putxet i el Farró","Usat. Euros/m2 construït",4903.1
+2017,6,"Gràcia",28,"Vallcarca i els Penitents","Usat. Euros/m2 construït",3564.8
+2017,6,"Gràcia",29,"el Coll","Usat. Euros/m2 construït",2720
+2017,6,"Gràcia",30,"la Salut","Usat. Euros/m2 construït",3862
+2017,6,"Gràcia",31,"la Vila de Gràcia","Usat. Euros/m2 construït",4552.9
+2017,6,"Gràcia",32,"el Camp d'en Grassot i Gràcia Nova","Usat. Euros/m2 construït",4011.9
+2017,7,"Horta-Guinardó",33,"el Baix Guinardó","Usat. Euros/m2 construït",3518.3
+2017,7,"Horta-Guinardó",34,"Can Baró","Usat. Euros/m2 construït",2423.7
+2017,7,"Horta-Guinardó",35,"el Guinardó","Usat. Euros/m2 construït",2740
+2017,7,"Horta-Guinardó",36,"la Font d'en Fargues","Usat. Euros/m2 construït",3420.5
+2017,7,"Horta-Guinardó",37,"el Carmel","Usat. Euros/m2 construït",2120.8
+2017,7,"Horta-Guinardó",38,"la Teixonera","Usat. Euros/m2 construït",2161.4
+2017,7,"Horta-Guinardó",39,"Sant Genís dels Agudells","Usat. Euros/m2 construït",2045.2
+2017,7,"Horta-Guinardó",40,"Montbau","Usat. Euros/m2 construït",2230.8
+2017,7,"Horta-Guinardó",41,"la Vall d'Hebron","Usat. Euros/m2 construït",3710.5
+2017,7,"Horta-Guinardó",42,"la Clota","Usat. Euros/m2 construït",NA
+2017,7,"Horta-Guinardó",43,"Horta","Usat. Euros/m2 construït",2573.5
+2017,8,"Nou Barris",44,"Vilapicina i la Torre Llobeta","Usat. Euros/m2 construït",2546.7
+2017,8,"Nou Barris",45,"Porta","Usat. Euros/m2 construït",2478.1
+2017,8,"Nou Barris",46,"el Turó de la Peira","Usat. Euros/m2 construït",1775.2
+2017,8,"Nou Barris",47,"Can Peguera","Usat. Euros/m2 construït",1713.6
+2017,8,"Nou Barris",48,"la Guineueta","Usat. Euros/m2 construït",2245
+2017,8,"Nou Barris",49,"Canyelles","Usat. Euros/m2 construït",1586.9
+2017,8,"Nou Barris",50,"les Roquetes","Usat. Euros/m2 construït",1837
+2017,8,"Nou Barris",51,"Verdun","Usat. Euros/m2 construït",2023.6
+2017,8,"Nou Barris",52,"la Prosperitat","Usat. Euros/m2 construït",2020.1
+2017,8,"Nou Barris",53,"la Trinitat Nova","Usat. Euros/m2 construït",1381.7
+2017,8,"Nou Barris",54,"Torre Baró","Usat. Euros/m2 construït",1380.5
+2017,8,"Nou Barris",55,"Ciutat Meridiana","Usat. Euros/m2 construït",1216.1
+2017,8,"Nou Barris",56,"Vallbona","Usat. Euros/m2 construït",2243.7
+2017,9,"Sant Andreu",57,"la Trinitat Vella","Usat. Euros/m2 construït",2057.9
+2017,9,"Sant Andreu",58,"Baró de Viver","Usat. Euros/m2 construït",2763
+2017,9,"Sant Andreu",59,"el Bon Pastor","Usat. Euros/m2 construït",1936.4
+2017,9,"Sant Andreu",60,"Sant Andreu","Usat. Euros/m2 construït",2781.9
+2017,9,"Sant Andreu",61,"la Sagrera","Usat. Euros/m2 construït",3303.8
+2017,9,"Sant Andreu",62,"el Congrés i els Indians","Usat. Euros/m2 construït",2672.9
+2017,9,"Sant Andreu",63,"Navas","Usat. Euros/m2 construït",3871.5
+2017,10,"Sant Martí",64,"el Camp de l'Arpa del Clot","Usat. Euros/m2 construït",3927.3
+2017,10,"Sant Martí",65,"el Clot","Usat. Euros/m2 construït",3687.5
+2017,10,"Sant Martí",66,"el Parc i la Llacuna del Poblenou","Usat. Euros/m2 construït",3821.2
+2017,10,"Sant Martí",67,"la Vila Olímpica del Poblenou","Usat. Euros/m2 construït",4315.3
+2017,10,"Sant Martí",68,"el Poblenou","Usat. Euros/m2 construït",4285.7
+2017,10,"Sant Martí",69,"Diagonal Mar i el Front Marítim del Poblenou","Usat. Euros/m2 construït",7020.2
+2017,10,"Sant Martí",70,"el Besòs i el Maresme","Usat. Euros/m2 construït",2951
+2017,10,"Sant Martí",71,"Provençals del Poblenou","Usat. Euros/m2 construït",5043.6
+2017,10,"Sant Martí",72,"Sant Martí de Provençals","Usat. Euros/m2 construït",3332.2
+2017,10,"Sant Martí",73,"la Verneda i la Pau","Usat. Euros/m2 construït",2026.4
