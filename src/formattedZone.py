@@ -30,14 +30,6 @@ def readIdealista(spark, folder_path):
 
     return idealista.cache()
 
-
-def fromRowToJson(spark, lookup_path):
-    lookup = spark.read.json(lookup_path).rdd
-    lookup = lookup.map(lambda r: r.asDict())
-
-    return lookup.cache()
-
-
 def formatAfterJoin(type, listDict, delCols, neigh_col=None):
     dicc = listDict[1][0]
     for col in delCols:
@@ -76,23 +68,6 @@ def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params):
     table_rec = table_rec.map(lambda r: formatAfterJoin("Neighborhood", r, neig_info_cols))
 
     return table_rec
-
-
-def unfoldIncomeRow(row):
-    id_district = row['idDistrict']
-    id_neighborhood = row['idNeighborhood']
-    dict_list = []
-    for info_row in row['info']:
-        info_dict = {
-            'idDistrict': id_district,
-            'idNeighborhood': id_neighborhood,
-            'RFD': info_row['RFD'],
-            'pop': info_row['pop'],
-            'year': info_row['year']
-        }
-        dict_list.append(info_dict)
-
-    return dict_list
 
 
 if __name__ == '__main__':
