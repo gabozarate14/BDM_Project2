@@ -126,18 +126,18 @@ if __name__ == '__main__':
         "lu_dist_cols": ["di", "di_n", "di_re"],
         "lu_neig_cols": ["ne", "ne_n", "ne_re"],
         "dist_col_name": "district",
-        "dist_info_cols": ['district'],
+        "dist_info_cols": [],
         "neig_col_name": "neighborhood",
-        "neig_info_cols": ['neighborhood']}
+        "neig_info_cols": []}
 
     idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista)
     for f in idealista_rec.collect():
         print(f)
 
     # To check columns that don't appear on the lookup tables
-    # no_idDist = idealista_rec.filter(lambda r: r["idDistrict"] == None)
-    # for f in no_idDist.collect():
-    #     print(f)
+    no_idDist = idealista_rec.filter(lambda r: r["idDistrict"] == None)
+    for f in no_idDist.collect():
+        print(f)
 
     # Reconciliate date with OpenData Lookup Tables
 
@@ -153,9 +153,9 @@ if __name__ == '__main__':
         "lu_dist_cols": ["district", "district_name", "district_reconciled"],
         "lu_neig_cols": ["neighborhood", "neighborhood_name", "neighborhood_reconciled"],
         "dist_col_name": "district_name",
-        "dist_info_cols": ['district_id', 'district_name'],
+        "dist_info_cols": ['district_id'],
         "neig_col_name": "neigh_name ",
-        "neig_info_cols": ['_id', 'neigh_name ']}
+        "neig_info_cols": ['_id']}
 
     income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income)
 
@@ -175,9 +175,9 @@ if __name__ == '__main__':
         "lu_dist_cols": ["district", "district_name", "district_reconciled"],
         "lu_neig_cols": ["neighborhood", "neighborhood_name", "neighborhood_reconciled"],
         "dist_col_name": "Nom_Districte",
-        "dist_info_cols": ['Codi_Districte', 'Nom_Districte'],
+        "dist_info_cols": ['Codi_Districte'],
         "neig_col_name": "Nom_Barri",
-        "neig_info_cols": ['Codi_Barri', 'Nom_Barri']}
+        "neig_info_cols": ['Codi_Barri']}
 
     price_rec = reconciliateDistNeig(price, lookup_di_od, lookup_ne_od, params_price)
 
