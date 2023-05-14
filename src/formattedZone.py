@@ -6,20 +6,46 @@ import os
 import sys
 from datetime import datetime
 import json
+import happybase
 
 CONFIG_ROUTE = 'utils/config.cfg'
+
+
+def createTableIfNotExists(connection, table):
+    if table.encode() not in connection.tables():
+        connection.create_table(table, {'cf': dict()})
+        print(f'Tabla {table} creada')
+
+
+def printHBaseTable(connection, tablename):
+    table = connection.table(tablename)
+    for key, data in table.scan():
+        print(f"Row key: {key}")
+        for column, value in data.items():
+            print(f"    Column: {column} => Value: {value}")
+
+
+def deleteHBaseTable(connection, tablename):
+    connection.delete_table(tablename, disable=True)
 
 
 def addColumnExtractDate(dicc, extract_date):
     dicc["extractDate"] = extract_date
     return dicc
 
+def cast_lists_to_tuples(d):
+    for k, v in d.items():
+        if isinstance(v, list):
+            d[k] = tuple(v)
+        elif isinstance(v, dict):
+            cast_lists_to_tuples(v)
+    return d
 
 def readIdealista(spark, folder_path):
     idealista = None
     for filename in os.listdir(folder_path):
         subfolder = '/'.join([folder_path, filename])
-        extract_date = datetime.strptime(filename[0:10], '%Y_%m_%d').date()
+        extract_date = datetime.strptime(filename[0:10], '%Y_%m_%d').date().strftime('%Y-%m-%d')
         if idealista:
             df = spark.read.parquet(subfolder).rdd
             df = df.map(lambda r: addColumnExtractDate(r.asDict(), extract_date))
@@ -29,6 +55,7 @@ def readIdealista(spark, folder_path):
             idealista = idealista.map(lambda r: addColumnExtractDate(r.asDict(), extract_date))
 
     return idealista.cache()
+
 
 def formatAfterJoin(type, listDict, delCols, neigh_col=None):
     dicc = listDict[1][0]
@@ -70,6 +97,33 @@ def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params):
     return table_rec
 
 
+def insertToHBase(connection, table_name, rdd):
+    createTableIfNotExists(connection, table_name)
+    now = datetime.now().strftime("%Y%m%dT%H%M%S")
+    with connection.table(table_name).batch(batch_size=1000) as batch:
+        for idx, row in enumerate(rdd.collect()):
+            key = "$".join([now, str(idx + 1)])
+            value = json.dumps(row)
+            batch.put(key, {'cf:value': value})
+
+def dropDuplicates(rdd):
+    rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
+    rdd = rdd.map(lambda r: tuple(r.items())).distinct().map(lambda r: dict(r))
+    return rdd
+
+def deleteDuplicatesHBase(connection):
+    for table_name_b in connection.tables():
+        table_name = table_name_b.decode()
+        table = connection.table(table_name)
+        rdd = spark.sparkContext.parallelize(list(table.scan())).map(
+            lambda r: json.loads(r[1][b'cf:value'].decode())).cache()
+        # Drops duplicates
+        rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
+        rdd = rdd.map(lambda r: tuple(r.items())).distinct().map(lambda r: dict(r))
+        deleteHBaseTable(connection, table_name)
+        insertToHBase(connection, table_name, rdd)
+
+
 if __name__ == '__main__':
     # Get the parameters
     config = configparser.ConfigParser()
@@ -87,6 +141,16 @@ if __name__ == '__main__':
     idealista_path = config.get('routes', 'idealista')
     income_path = config.get('routes', 'income_opendata')
     price_path = config.get('routes', 'opendatabcn-price')
+    # Hbase tables
+    idealista_table_name = config.get('hbase', 'idealista_table')
+    income_table_name = config.get('hbase', 'income_table')
+    price_table_name = config.get('hbase', 'price_table')
+    district_table_name = config.get('hbase', 'district_table')
+    neighborhood_table_name = config.get('hbase', 'neighborhood_table')
+
+    # Connect to HBase
+    connection = happybase.Connection(host=host, port=9090)
+    connection.open()
 
     # Set Spark
     os.environ["HADOOP_HOME"] = hadoop_home
@@ -131,13 +195,11 @@ if __name__ == '__main__':
         "neig_info_cols": []}
 
     idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista)
-    for f in idealista_rec.collect():
-        print(f)
+    # Drops duplicates
+    idealista_rec = dropDuplicates(idealista_rec)
+    # Insert to hbase
+    insertToHBase(connection, idealista_table_name, idealista_rec)
 
-    # To check columns that don't appear on the lookup tables
-    no_idDist = idealista_rec.filter(lambda r: r["idDistrict"] == None)
-    for f in no_idDist.collect():
-        print(f)
 
     # Reconciliate date with OpenData Lookup Tables
 
@@ -164,8 +226,10 @@ if __name__ == '__main__':
         {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
          'idNeighborhood': row['idNeighborhood']} for info in row['info']])
 
-    for f in unfolded_income_rec.collect():
-        print(f)
+    # Drops duplicates
+    unfolded_income_rec = dropDuplicates(unfolded_income_rec)
+    # Insert to hbase
+    insertToHBase(connection, income_table_name, unfolded_income_rec)
 
     # Price
 
@@ -180,9 +244,10 @@ if __name__ == '__main__':
         "neig_info_cols": ['Codi_Barri']}
 
     price_rec = reconciliateDistNeig(price, lookup_di_od, lookup_ne_od, params_price)
-
-    for f in price_rec.collect():
-        print(f)
+    # Drops duplicates
+    price_rec = dropDuplicates(price_rec)
+    # Insert to hbase
+    insertToHBase(connection, price_table_name, price_rec)
 
     # Create the Lookup tables of the database
 
@@ -190,9 +255,10 @@ if __name__ == '__main__':
     district = lookup_di_re.map(lambda r: (r["_id"], r["di"])).union(
         lookup_di_od.map(lambda r: (r["_id"], r["district"]))).reduceByKey(lambda a, b: a).map(
         lambda r: {"_id": r[0], "name": r[1]})
-
-    for f in district.collect():
-        print(f)
+    # Drops duplicates
+    district = dropDuplicates(district)
+    # Insert to hbase
+    insertToHBase(connection, district_table_name, district)
 
     # Neighbour
     neigh_x_dist = lookup_di_re.union(lookup_di_od).flatMap(
@@ -202,5 +268,12 @@ if __name__ == '__main__':
         lookup_ne_od.map(lambda r: (r["_id"], r["neighborhood"]))).reduceByKey(lambda a, b: a).join(neigh_x_dist).map(
         lambda r: {"_id": r[1][1], "name": r[1][0], "idDistrict": r[0]})
 
-    for f in neighborhood.collect():
-        print(f)
+    # Drops duplicates
+    neighborhood = dropDuplicates(neighborhood)
+    # Insert to hbase
+    insertToHBase(connection, neighborhood_table_name, neighborhood)
+
+    # Delete possible duplicates generated while inserting
+    deleteDuplicatesHBase(connection)
+
+    connection.close()
