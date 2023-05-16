@@ -14,9 +14,9 @@ def delete_hbase_table(connection, tablename):
 connection = happybase.Connection(host='10.4.41.52', port=9090)
 connection.open()
 
-# delete_hbase_table(connection, 'idealista')
+# delete_hbase_table(connection, 'price')
 print(connection.tables())
 
-printHBaseTable(connection, 'idealista')
+printHBaseTable(connection, 'price')
 
 connection.close()

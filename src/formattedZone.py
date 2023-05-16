@@ -108,7 +108,7 @@ def insertToHBase(connection, table_name, rdd):
 
 def dropDuplicates(rdd):
     rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
-    rdd = rdd.map(lambda r: tuple(r.items())).distinct().map(lambda r: dict(r))
+    rdd = rdd.map(lambda r: tuple(sorted(r.items()))).distinct().map(lambda r: dict(r))
     return rdd
 
 def deleteDuplicatesHBase(connection):
@@ -119,7 +119,7 @@ def deleteDuplicatesHBase(connection):
             lambda r: json.loads(r[1][b'cf:value'].decode())).cache()
         # Drops duplicates
         rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
-        rdd = rdd.map(lambda r: tuple(r.items())).distinct().map(lambda r: dict(r))
+        rdd = rdd.map(lambda r: tuple(sorted(r.items()))).distinct().map(lambda r: dict(r))
         deleteHBaseTable(connection, table_name)
         insertToHBase(connection, table_name, rdd)
 
@@ -168,68 +168,68 @@ if __name__ == '__main__':
         .config(conf=conf) \
         .getOrCreate()
 
-    # Data Reconciliation
-
-    # Idealista with Rent Lookup Tables
-
-    lookup_di_re = spark.read.json(f"{lookup_path}/rent_lookup_district.json").rdd.map(lambda r: r.asDict()).cache()
-    lookup_ne_re = spark.read.json(f"{lookup_path}/rent_lookup_neighborhood.json").rdd.map(lambda r: r.asDict()).cache()
-
-    # idealista = spark.read.parquet(f"{idealista_path}/**/*").rdd.map(lambda r: r.asDict()).cache() # Reads all but does not add the date
-    idealista = readIdealista(spark, idealista_path)
-
-    # Parameters structure
-    # - lu_dist_cols: column names of the lookup table that will be searched for district
-    # - lu_neig_cols: column names of the lookup table that will be searched for neighborhood
-    # - dist_col_name: column name that contains the district info to match in the main table (e.g. Idealista,Income, etc.)
-    # - dist_info_cols: column names that contain the district infor that will be replaced by the global id
-    # - neig_col_name: column name that contains the neighborhood info to match in the main table (e.g. Idealista,Income, etc.)
-    # - neig_info_cols: column names that contain the neighborhood infor that will be replaced by the global id
-
-    params_idealista = {
-        "lu_dist_cols": ["di", "di_n", "di_re"],
-        "lu_neig_cols": ["ne", "ne_n", "ne_re"],
-        "dist_col_name": "district",
-        "dist_info_cols": [],
-        "neig_col_name": "neighborhood",
-        "neig_info_cols": []}
-
-    idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista)
-    # Drops duplicates
-    idealista_rec = dropDuplicates(idealista_rec)
-    # Insert to hbase
-    insertToHBase(connection, idealista_table_name, idealista_rec)
-
-
-    # Reconciliate date with OpenData Lookup Tables
+    # # Data Reconciliation
+    #
+    # # Idealista with Rent Lookup Tables
+    #
+    # lookup_di_re = spark.read.json(f"{lookup_path}/rent_lookup_district.json").rdd.map(lambda r: r.asDict()).cache()
+    # lookup_ne_re = spark.read.json(f"{lookup_path}/rent_lookup_neighborhood.json").rdd.map(lambda r: r.asDict()).cache()
+    #
+    # # idealista = spark.read.parquet(f"{idealista_path}/**/*").rdd.map(lambda r: r.asDict()).cache() # Reads all but does not add the date
+    # idealista = readIdealista(spark, idealista_path)
+    #
+    # # Parameters structure
+    # # - lu_dist_cols: column names of the lookup table that will be searched for district
+    # # - lu_neig_cols: column names of the lookup table that will be searched for neighborhood
+    # # - dist_col_name: column name that contains the district info to match in the main table (e.g. Idealista,Income, etc.)
+    # # - dist_info_cols: column names that contain the district infor that will be replaced by the global id
+    # # - neig_col_name: column name that contains the neighborhood info to match in the main table (e.g. Idealista,Income, etc.)
+    # # - neig_info_cols: column names that contain the neighborhood infor that will be replaced by the global id
+    #
+    # params_idealista = {
+    #     "lu_dist_cols": ["di", "di_n", "di_re"],
+    #     "lu_neig_cols": ["ne", "ne_n", "ne_re"],
+    #     "dist_col_name": "district",
+    #     "dist_info_cols": [],
+    #     "neig_col_name": "neighborhood",
+    #     "neig_info_cols": []}
+    #
+    # idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista)
+    # # Drops duplicates
+    # idealista_rec = dropDuplicates(idealista_rec)
+    # # Insert to hbase
+    # insertToHBase(connection, idealista_table_name, idealista_rec)
+    #
+    #
+    # # Reconciliate date with OpenData Lookup Tables
 
     lookup_di_od = spark.read.json(f"{lookup_path}/income_lookup_district.json").rdd.map(lambda r: r.asDict()).cache()
     lookup_ne_od = spark.read.json(f"{lookup_path}/income_lookup_neighborhood.json").rdd.map(
         lambda r: r.asDict()).cache()
 
-    # Income x Neighborhood
-
-    income = spark.read.json(income_path).rdd.map(lambda r: r.asDict()).cache()
-
-    params_income = {
-        "lu_dist_cols": ["district", "district_name", "district_reconciled"],
-        "lu_neig_cols": ["neighborhood", "neighborhood_name", "neighborhood_reconciled"],
-        "dist_col_name": "district_name",
-        "dist_info_cols": ['district_id'],
-        "neig_col_name": "neigh_name ",
-        "neig_info_cols": ['_id']}
-
-    income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income)
-
-    # To unfold each element of the income table
-    unfolded_income_rec = income_rec.flatMap(lambda row: [
-        {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
-         'idNeighborhood': row['idNeighborhood']} for info in row['info']])
-
-    # Drops duplicates
-    unfolded_income_rec = dropDuplicates(unfolded_income_rec)
-    # Insert to hbase
-    insertToHBase(connection, income_table_name, unfolded_income_rec)
+    # # Income x Neighborhood
+    #
+    # income = spark.read.json(income_path).rdd.map(lambda r: r.asDict()).cache()
+    #
+    # params_income = {
+    #     "lu_dist_cols": ["district", "district_name", "district_reconciled"],
+    #     "lu_neig_cols": ["neighborhood", "neighborhood_name", "neighborhood_reconciled"],
+    #     "dist_col_name": "district_name",
+    #     "dist_info_cols": ['district_id'],
+    #     "neig_col_name": "neigh_name ",
+    #     "neig_info_cols": ['_id']}
+    #
+    # income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income)
+    #
+    # # To unfold each element of the income table
+    # unfolded_income_rec = income_rec.flatMap(lambda row: [
+    #     {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
+    #      'idNeighborhood': row['idNeighborhood']} for info in row['info']])
+    #
+    # # Drops duplicates
+    # unfolded_income_rec = dropDuplicates(unfolded_income_rec)
+    # # Insert to hbase
+    # insertToHBase(connection, income_table_name, unfolded_income_rec)
 
     # Price
 
@@ -244,36 +244,52 @@ if __name__ == '__main__':
         "neig_info_cols": ['Codi_Barri']}
 
     price_rec = reconciliateDistNeig(price, lookup_di_od, lookup_ne_od, params_price)
-    # Drops duplicates
-    price_rec = dropDuplicates(price_rec)
-    # Insert to hbase
-    insertToHBase(connection, price_table_name, price_rec)
 
-    # Create the Lookup tables of the database
+    # Fold the different prices into one row as columns
+    fold_price_rec = price_rec.map(lambda x: (
+        (x['Any'], x['Nom_Districte'], x['Nom_Barri'], x['idDistrict'], x['idNeighborhood']),
+        [(x['Preu_mitja_habitatge'], x['Valor'])])) \
+        .reduceByKey(lambda x, y: x + y)
 
-    # District
-    district = lookup_di_re.map(lambda r: (r["_id"], r["di"])).union(
-        lookup_di_od.map(lambda r: (r["_id"], r["district"]))).reduceByKey(lambda a, b: a).map(
-        lambda r: {"_id": r[0], "name": r[1]})
-    # Drops duplicates
-    district = dropDuplicates(district)
-    # Insert to hbase
-    insertToHBase(connection, district_table_name, district)
-
-    # Neighbour
-    neigh_x_dist = lookup_di_re.union(lookup_di_od).flatMap(
-        lambda r: [(neigh, r["_id"]) for neigh in r["ne_id" if "ne_id" in r else "neighborhood_id"]]).distinct()
-
-    neighborhood = lookup_ne_re.map(lambda r: (r["_id"], r["ne"])).union(
-        lookup_ne_od.map(lambda r: (r["_id"], r["neighborhood"]))).reduceByKey(lambda a, b: a).join(neigh_x_dist).map(
-        lambda r: {"_id": r[1][1], "name": r[1][0], "idDistrict": r[0]})
+    fold_price_rec = fold_price_rec.map(lambda x: {
+        'Any': x[0][0],
+        'Nom_Districte': x[0][1],
+        'Nom_Barri': x[0][2],
+        'idDistrict': x[0][3],
+        'idNeighborhood': x[0][4],
+        **dict(x[1])
+    })
 
     # Drops duplicates
-    neighborhood = dropDuplicates(neighborhood)
+    fold_price_rec = dropDuplicates(fold_price_rec)
     # Insert to hbase
-    insertToHBase(connection, neighborhood_table_name, neighborhood)
+    insertToHBase(connection, price_table_name, fold_price_rec)
 
-    # Delete possible duplicates generated while inserting
-    deleteDuplicatesHBase(connection)
+    # # Create the Lookup tables of the database
+    #
+    # # District
+    # district = lookup_di_re.map(lambda r: (r["_id"], r["di"])).union(
+    #     lookup_di_od.map(lambda r: (r["_id"], r["district"]))).reduceByKey(lambda a, b: a).map(
+    #     lambda r: {"_id": r[0], "name": r[1]})
+    # # Drops duplicates
+    # district = dropDuplicates(district)
+    # # Insert to hbase
+    # insertToHBase(connection, district_table_name, district)
+    #
+    # # Neighbour
+    # neigh_x_dist = lookup_di_re.union(lookup_di_od).flatMap(
+    #     lambda r: [(neigh, r["_id"]) for neigh in r["ne_id" if "ne_id" in r else "neighborhood_id"]]).distinct()
+    #
+    # neighborhood = lookup_ne_re.map(lambda r: (r["_id"], r["ne"])).union(
+    #     lookup_ne_od.map(lambda r: (r["_id"], r["neighborhood"]))).reduceByKey(lambda a, b: a).join(neigh_x_dist).map(
+    #     lambda r: {"_id": r[1][1], "name": r[1][0], "idDistrict": r[0]})
+    #
+    # # Drops duplicates
+    # neighborhood = dropDuplicates(neighborhood)
+    # # Insert to hbase
+    # insertToHBase(connection, neighborhood_table_name, neighborhood)
+    #
+    # # Delete possible duplicates generated while inserting
+    # deleteDuplicatesHBase(connection)
 
     connection.close()
