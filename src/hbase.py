@@ -14,9 +14,19 @@ def delete_hbase_table(connection, tablename):
 connection = happybase.Connection(host='10.4.41.52', port=9090)
 connection.open()
 
-# delete_hbase_table(connection, 'price')
-print(connection.tables())
+# [b'district', b'idealista', b'income', b'neighborhood', b'price']
 
-printHBaseTable(connection, 'price')
+printHBaseTable(connection, 'neighborhood')
+# delete_hbase_table(connection, 'neighborhood')
+
+# print(connection.tables())
+
+# table = connection.table('idealista')
+#
+# # Scan the table to count rows
+# row_count = 0
+# for _ in table.scan():
+#     row_count += 1
+# print(row_count)
 
 connection.close()

@@ -1,0 +1,92 @@
+Year,Month,District,Neighborhood,Price
+2020,02,Sarrià-Sant Gervasi,Les Tres Torres,1097111.111111111
+2020,12,Sarrià-Sant Gervasi,Les Tres Torres,1198769.2307692308
+2020,01,Sarrià-Sant Gervasi,Les Tres Torres,1212333.3333333333
+2020,08,Sarrià-Sant Gervasi,Les Tres Torres,919909.0909090909
+2020,10,Sarrià-Sant Gervasi,Les Tres Torres,951600.0
+2020,09,Sarrià-Sant Gervasi,Les Tres Torres,1080235.294117647
+2020,11,Sarrià-Sant Gervasi,Les Tres Torres,1132000.0
+2020,06,Sarrià-Sant Gervasi,Les Tres Torres,938000.0
+2020,07,Sarrià-Sant Gervasi,Les Tres Torres,973500.0
+2020,10,Les Corts,Les Corts,719962.9629629629
+2020,12,Les Corts,Les Corts,464656.74358974356
+2020,08,Les Corts,Les Corts,811681.8181818182
+2021,02,Les Corts,Les Corts,568653.8461538461
+2020,11,Les Corts,Les Corts,732414.2857142857
+2020,03,Les Corts,Les Corts,744300.0
+2020,04,Les Corts,Les Corts,595363.6363636364
+2020,02,Les Corts,Les Corts,1033800.0
+2020,05,Les Corts,Les Corts,840250.0
+2020,07,Les Corts,Les Corts,815000.0
+2020,09,Les Corts,Les Corts,809125.0
+2020,01,Les Corts,Les Corts,608333.3333333334
+2020,06,Les Corts,Les Corts,840000.0
+2020,09,Sant Martí,El Camp de l'Arpa del Clot,320000.0
+2020,12,Sants-Montjuïc,Sants,294906.600660066
+2021,01,Sants-Montjuïc,Sants,304900.0
+2020,04,Sants-Montjuïc,Sants,310817.85714285716
+2020,11,Sants-Montjuïc,Sants,369142.85714285716
+2020,03,Sants-Montjuïc,Sants,318750.0
+2020,08,Sants-Montjuïc,Sants,379750.0
+2020,05,Sants-Montjuïc,Sants,333842.1052631579
+2021,02,Sants-Montjuïc,Sants,294642.85714285716
+2020,10,Sants-Montjuïc,Sants,341687.5
+2020,09,Sants-Montjuïc,Sants,257000.0
+2020,06,Sants-Montjuïc,Sants,379000.0
+2020,12,Sants-Montjuïc,La Marina del Port,234535.35353535353
+2020,03,Sants-Montjuïc,La Marina del Port,238644.15584415584
+2020,05,Sants-Montjuïc,La Marina del Port,303346.1538461539
+2021,01,Sants-Montjuïc,La Marina del Port,260102.38095238095
+2020,08,Sants-Montjuïc,La Marina del Port,210342.85714285713
+2020,10,Sants-Montjuïc,La Marina del Port,352000.0
+2020,11,Sants-Montjuïc,La Marina del Port,175000.0
+2020,07,Sants-Montjuïc,La Marina del Port,352000.0
+2020,04,Sants-Montjuïc,La Marina del Port,352000.0
+2020,08,Nou Barris,Les Roquetes,181333.33333333334
+2020,09,Nou Barris,Les Roquetes,170000.0
+2020,08,Nou Barris,Canyelles,198000.0
+2020,02,Nou Barris,Canyelles,198000.0
+2020,08,Nou Barris,La Trinitat Nova,159000.0
+2020,07,Gràcia,Vallcarca i els Penitents,435666.6666666667
+2020,08,Gràcia,Vallcarca i els Penitents,446714.28571428574
+2020,09,Gràcia,Vallcarca i els Penitents,429166.6666666667
+2020,11,Gràcia,Vallcarca i els Penitents,434700.0
+2020,05,Gràcia,Vallcarca i els Penitents,492846.1538461539
+2021,02,Gràcia,Vallcarca i els Penitents,598000.0
+2020,10,Gràcia,Vallcarca i els Penitents,423666.6666666667
+2020,02,Gràcia,Vallcarca i els Penitents,429600.0
+2020,12,Gràcia,Vallcarca i els Penitents,262500.0
+2021,03,Ciutat Vella,El Gòtic,621792.578125
+2021,02,Ciutat Vella,El Gòtic,664582.0143884892
+2020,07,Ciutat Vella,El Gòtic,648750.0
+2021,01,Ciutat Vella,El Gòtic,430000.0
+2021,03,Ciutat Vella,El Raval,370885.9857142857
+2021,02,Ciutat Vella,El Raval,386173.0641025641
+2021,01,Ciutat Vella,El Raval,494000.0
+2020,07,Ciutat Vella,El Raval,365888.8888888889
+2020,03,Ciutat Vella,El Raval,265000.0
+2020,10,Ciutat Vella,El Raval,265000.0
+2020,11,Ciutat Vella,El Raval,725000.0
+2020,08,Horta Guinardó,La Teixonera,214000.0
+2020,11,Horta Guinardó,La Teixonera,235777.77777777778
+2021,02,Horta Guinardó,La Teixonera,261128.57142857142
+2020,05,Horta Guinardó,La Teixonera,211833.33333333334
+2020,09,Horta Guinardó,La Teixonera,255000.0
+2020,07,Horta Guinardó,La Teixonera,223666.66666666666
+2020,07,Horta Guinardó,La Vall d'Hebron - La Clota,293000.0
+2020,08,Horta Guinardó,La Vall d'Hebron - La Clota,293000.0
+2020,02,Horta Guinardó,La Vall d'Hebron - La Clota,268333.3333333333
+2020,09,Horta Guinardó,La Vall d'Hebron - La Clota,293000.0
+2020,07,Horta Guinardó,El Carmel,146500.0
+2020,11,Horta Guinardó,El Carmel,156300.0
+2021,02,Horta Guinardó,El Carmel,163900.0
+2020,08,Horta Guinardó,El Carmel,149000.0
+2020,01,Horta Guinardó,El Carmel,207566.66666666666
+2020,09,Horta Guinardó,El Carmel,146500.0
+2020,01,Horta Guinardó,Can Baró,311333.3333333333
+2020,10,Horta Guinardó,Can Baró,210000.0
+2021,02,Horta Guinardó,Can Baró,311333.3333333333
+2020,09,Horta Guinardó,Can Baró,210000.0
+2020,07,Horta Guinardó,Can Baró,210000.0
+2020,01,Horta Guinardó,La Font d'En Fargues,293000.0
+2021,02,Horta Guinardó,La Font d'En Fargues,450000.0
