@@ -12,11 +12,11 @@ CONFIG_ROUTE = 'utils/config.cfg'
 MODEL_ROUTE = '../model/'
 
 
-def readFormatted(connection, table_name):
-    table = connection.table(table_name)
-    rdd = spark.sparkContext.parallelize(list(table.scan())).map(
-        lambda r: json.loads(r[1][b'cf:value'].decode())).cache()
-    return rdd
+def readFormatted(table):
+    hdfs_path = config.get('hdfs_formatted', table)
+    directory = f"hdfs://{host}:27000/{hdfs_path}"
+    df = spark.read.parquet(directory)
+    return df.rdd.map(lambda r: r.asDict()).cache()
 
 
 def formatPredKPI1(listDict):
@@ -67,21 +67,11 @@ if __name__ == '__main__':
     pyspark_driver_python = config.get('pyspark', 'driver_python')
     # Hadoop
     hadoop_home = config.get('hadoop', 'home')
-    # Hbase tables
-    idealista_table_name = config.get('hbase', 'idealista_table')
-    income_table_name = config.get('hbase', 'income_table')
-    price_table_name = config.get('hbase', 'price_table')
-    district_table_name = config.get('hbase', 'district_table')
-    neighborhood_table_name = config.get('hbase', 'neighborhood_table')
 
     # HDFS
     host = config.get('data_server', 'host')
     user = config.get('data_server', 'user')
     hdfs_path = config.get('routes', 'hdfs')
-
-    # Connect to HBase
-    connection = happybase.Connection(host=host, port=9090)
-    connection.open()
 
     # Set Spark
     os.environ["HADOOP_HOME"] = hadoop_home
@@ -92,51 +82,70 @@ if __name__ == '__main__':
     # Set Spark
     conf = SparkConf() \
         .set("spark.master", "local") \
-        .set("spark.app.name", "Exploitation Zone") \
-        .set("dfs.client.max.block.acquire.failures", "100")
+        .set("spark.app.name", "Exploitation Zone - Dashboard") \
+        .set("spark.executor.memory", "8g") \
+        .set("spark.driver.memory", "4g") \
+        .set("spark.sql.shuffle.partitions", "4") \
+        .set("spark.default.parallelism", "8") \
+        .set("spark.jars", "resources/postgresql-jdbc.jar")
 
     # Create the session
     spark = SparkSession.builder \
         .config(conf=conf) \
         .getOrCreate()
 
-    income_rdd = readFormatted(connection, income_table_name)
-    price_rdd = readFormatted(connection, price_table_name)
-    idealista_rdd = readFormatted(connection, idealista_table_name)
-    neighborhood_rdd = readFormatted(connection, neighborhood_table_name)
-    district_rdd = readFormatted(connection, district_table_name)
+    # Postgres Connection settings
+    jdbc_url = config.get('postgres_dashboard', 'url')
+    connection_properties = {
+        "user": config.get('postgres_dashboard', 'user'),
+        "password": config.get('postgres_dashboard', 'password'),
+        "driver": "org.postgresql.Driver"
+    }
+
+    income_rdd = readFormatted('income')
+    price_rdd = readFormatted('price')
+    idealista_rdd = readFormatted('idealista')
+    neighborhood_rdd = readFormatted('neighborhood')
+    district_rdd = readFormatted('district')
+
+    # Collect the RDD to accelerate the calculations
+    income_rdd.collect()
+    price_rdd.collect()
+    idealista_rdd.collect()
+    neighborhood_rdd.collect()
+    district_rdd.collect()
 
     dist_join = district_rdd.map(lambda r: (r['_id'], r['name'])).cache()
     neigh_join = neighborhood_rdd.map(lambda r: (r['_id'], r['name'])).cache()
 
-    # KPI 1: RFD / Total. Euros/m2 construït
-    kpi1_rdd = income_rdd.filter(lambda r: r['idNeighborhood'] and r['idNeighborhood']).map(lambda r: (
+    # KPI 1: ratio_RFD_m2_built
+    ratio_RFD_m2_built_rdd = income_rdd.filter(lambda r: r['idNeighborhood'] and r['idNeighborhood']).map(lambda r: (
         (str(r['year']) if r['year'] else '') + (r['idNeighborhood'] if r['idNeighborhood'] else ''), r)).join(
         price_rdd.map(
             lambda r: (
                 (str(r['Any']) if r['Any'] else '') + (r['idNeighborhood'] if r['idNeighborhood'] else ''), r))).map(
         lambda r: formatPredKPI1(r[1])).map(lambda r: (r[1], r)).join(dist_join).map(
         lambda r: (r[1][0][2], r)).join(neigh_join).map(lambda r: extract_tuples(r)).map(
-        lambda r:tuple(r[i] for i in (2, 14, 15, 5, 6, 7, 8, 9, 10, 11, 12, 13)))
-        # lambda r: tuple(str(v) if v != 'NA' else None for v in r))
+        lambda r: tuple(r[i] for i in (2, 14, 15, 5, 6, 7, 8, 9, 10, 11, 12, 13))).map(
+        lambda r: tuple(v if v != 'NA' else None for v in r))
 
-    df_kpi1 = spark.createDataFrame(kpi1_rdd,
-       ['Year',
-        'District',
-        'Neighborhood',
-        'RFD',
-        'Population',
-        'New Euros/m2 built',
-        "New Thousand of Euros",
-        'Total Euros/m2 built',
-        "Total Thousand of Euros",
-        'Used Euros/m2 built',
-        "Used Thousand of Euros",
-        'Kpi'])
+    df_ratio_RFD_m2_built_rdd = spark.createDataFrame(ratio_RFD_m2_built_rdd,
+                                                      ['Year',
+                                                       'District',
+                                                       'Neighborhood',
+                                                       'RFD',
+                                                       'Population',
+                                                       'New_Euros_m2_built',
+                                                       "New_Thousand_of_Euros",
+                                                       'Total_Euros_m2_built',
+                                                       "Total_Thousand_of_Euros",
+                                                       'Used_Euros_m2_built',
+                                                       "Used_Thousand_of_Euros",
+                                                       'Kpi'])
 
-    output_directory = f"hdfs://{host}:27000/{hdfs_path}/model/kpi1"
-    # output_directory = '../output/kpi1'
-    df_kpi1.write.csv(output_directory, header=True)
+    df_ratio_RFD_m2_built_rdd.write. \
+        option("reWriteBatchedInserts", "true") \
+        .jdbc(jdbc_url, table="ratio_RFD_m2_built", mode="overwrite", properties=connection_properties)
 
     # KPI 2: Average income x year
     avg_income_x_year = income_rdd.filter(lambda x: x["idDistrict"] and x["idNeighborhood"]).map(
@@ -146,12 +155,12 @@ if __name__ == '__main__':
         lambda r: (r[1][0][2], r)).join(neigh_join).map(lambda r: extract_tuples(r)).map(
         lambda r: (str(r[2]), r[6], r[7], str(r[5])))
 
-    output_directory = f"hdfs://{host}:27000/{hdfs_path}/dashboard/avg_income_x_year"
-    # output_directory = '../output/avg_income_x_year'
     df_avg_income_x_year = spark.createDataFrame(avg_income_x_year,
                                                  ["Year", "District", "Neighborhood", "RFD"])
-    df_avg_income_x_year.write.csv(output_directory, header=True)
 
+    df_avg_income_x_year.write.option("reWriteBatchedInserts", "true").jdbc(jdbc_url, table="avg_income_x_year",
+                                                                            mode="overwrite",
+                                                                            properties=connection_properties)
 
     # KPI 3. Average flat sale price x month
     avg_flat_sale_price_x_month = idealista_rdd.filter(
@@ -165,36 +174,10 @@ if __name__ == '__main__':
         lambda r: (r[1][0][3], r)).join(neigh_join).map(lambda r: extract_tuples(r)).map(
         lambda r: (str(r[2]), str(r[3]), r[7], r[8], str(r[6])))
 
-    output_directory = f"hdfs://{host}:27000/{hdfs_path}/dashboard/df_avg_flat_sale_price_x_month"
-    # output_directory = '../output/df_avg_flat_sale_price_x_month'
     df_avg_flat_sale_price_x_month = spark.createDataFrame(avg_flat_sale_price_x_month,
                                                            ["Year", "Month", "District", "Neighborhood", "Price"])
-    df_avg_flat_sale_price_x_month.write.csv(output_directory, header=True)
+    df_avg_flat_sale_price_x_month.write. \
+        option("reWriteBatchedInserts", "true") \
+        .jdbc(jdbc_url, table="avg_flat_sale_price_x_month", mode="overwrite", properties=connection_properties)
 
-    # KPI 4: Average sales price x neighborhood
-
-    avg_sale_price_x_neighborhood = idealista_rdd.filter(lambda r: r['operation'] == 'sale').map(
-        lambda r: (r['idNeighborhood'], (r['price'], 1))).reduceByKey(lambda a, b: (a[0] + b[0], a[1] + b[1])).map(
-        lambda r: (r[0], r[1][0] / r[1][1]))
-
-    # KPI 5: Average RFD x neighborhood
-
-    avg_rfd_x_neighborhood = income_rdd.map(lambda r: (r['idNeighborhood'], (r['RFD'], 1))).reduceByKey(
-        lambda a, b: (a[0] + b[0], a[1] + b[1])).map(
-        lambda r: (r[0], r[1][0] / r[1][1]))
-
-    # predictive_rdd will contain KPI 4 and 5 joined to predict RFD based on sale
-
-    predictive_rdd = avg_sale_price_x_neighborhood.join(avg_rfd_x_neighborhood).join(neigh_join).map(
-        lambda r: (r[1][1], r[1][0][0], r[1][0][1]))
-
-    df_predictive = spark.createDataFrame(predictive_rdd,
-                            ["Neighborhood", "Price", "RFD"])
-
-    output_directory = f"hdfs://{host}:27000/{hdfs_path}/model/avg_rfd_x_neighborhood"
-    # output_directory = '../output/avg_rfd_x_neighborhood'
-
-    df_predictive.write.csv(output_directory, header=True)
-
-    connection.close()
     spark.stop()

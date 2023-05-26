@@ -6,32 +6,16 @@ import os
 import sys
 from datetime import datetime
 import json
-import happybase
+from utils.tableSchemas import *
+from pyspark.sql import Row
 
 CONFIG_ROUTE = 'utils/config.cfg'
-
-
-def createTableIfNotExists(connection, table):
-    if table.encode() not in connection.tables():
-        connection.create_table(table, {'cf': dict()})
-        print(f'Tabla {table} creada')
-
-
-def printHBaseTable(connection, tablename):
-    table = connection.table(tablename)
-    for key, data in table.scan():
-        print(f"Row key: {key}")
-        for column, value in data.items():
-            print(f"    Column: {column} => Value: {value}")
-
-
-def deleteHBaseTable(connection, tablename):
-    connection.delete_table(tablename, disable=True)
 
 
 def addColumnExtractDate(dicc, extract_date):
     dicc["extractDate"] = extract_date
     return dicc
+
 
 def cast_lists_to_tuples(d):
     for k, v in d.items():
@@ -40,6 +24,7 @@ def cast_lists_to_tuples(d):
         elif isinstance(v, dict):
             cast_lists_to_tuples(v)
     return d
+
 
 def readIdealista(spark, folder_path):
     idealista = None
@@ -70,7 +55,7 @@ def formatAfterJoin(type, listDict, delCols, neigh_col=None):
         return dicc
 
 
-def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params):
+def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params, final_function=None):
     # Read parameters
     lu_dist_cols = params["lu_dist_cols"]
     lu_neig_cols = params["lu_neig_cols"]
@@ -78,6 +63,7 @@ def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params):
     dist_info_cols = params["dist_info_cols"]
     neig_col_name = params["neig_col_name"]
     neig_info_cols = params["neig_info_cols"]
+    tuple_order = params["tuple_order"]
 
     # Reconciliate Data
 
@@ -94,35 +80,38 @@ def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params):
                                         lu_neig_cols]).distinct())
     table_rec = table_rec.map(lambda r: formatAfterJoin("Neighborhood", r, neig_info_cols))
 
+    if final_function:
+        table_rec = final_function(table_rec)
+
+    # Format to tuple
+    table_rec = table_rec.map(
+        lambda r: tuple((r[key] if key in r else None) for key in tuple_order)).map(
+        lambda r: tuple((json.dumps(row.asDict())) if isinstance(row, Row) else row for row in r))
+
     return table_rec
 
 
-def insertToHBase(connection, table_name, rdd):
-    createTableIfNotExists(connection, table_name)
-    now = datetime.now().strftime("%Y%m%dT%H%M%S")
-    with connection.table(table_name).batch(batch_size=1000) as batch:
-        for idx, row in enumerate(rdd.collect()):
-            key = "$".join([now, str(idx + 1)])
-            value = json.dumps(row)
-            batch.put(key, {'cf:value': value})
+def income_fold(income_rec):
+    # To unfold each element of the income table
+    return income_rec.flatMap(lambda row: [
+        {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
+         'idNeighborhood': row['idNeighborhood']} for info in row['info']])
 
-def dropDuplicates(rdd):
-    rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
-    rdd = rdd.map(lambda r: tuple(sorted(r.items()))).distinct().map(lambda r: dict(r))
-    return rdd
+def price_fold(price_rec):
+    # Fold the different prices into one row as columns
+    fold_price_rec = price_rec.map(lambda x: (
+        (x['Any'], x['Nom_Districte'], x['Nom_Barri'], x['idDistrict'], x['idNeighborhood']),
+        [(x['Preu_mitja_habitatge'], x['Valor'])])) \
+        .reduceByKey(lambda x, y: x + y)
 
-def deleteDuplicatesHBase(connection):
-    for table_name_b in connection.tables():
-        table_name = table_name_b.decode()
-        table = connection.table(table_name)
-        rdd = spark.sparkContext.parallelize(list(table.scan())).map(
-            lambda r: json.loads(r[1][b'cf:value'].decode())).cache()
-        # Drops duplicates
-        rdd = rdd.map(lambda r: cast_lists_to_tuples(r))
-        rdd = rdd.map(lambda r: tuple(sorted(r.items()))).distinct().map(lambda r: dict(r))
-        deleteHBaseTable(connection, table_name)
-        insertToHBase(connection, table_name, rdd)
-
+    return fold_price_rec.map(lambda x: {
+        'Any': x[0][0],
+        'Nom_Districte': x[0][1],
+        'Nom_Barri': x[0][2],
+        'idDistrict': x[0][3],
+        'idNeighborhood': x[0][4],
+        **dict(x[1])
+    })
 
 if __name__ == '__main__':
     # Get the parameters
@@ -141,16 +130,6 @@ if __name__ == '__main__':
     idealista_path = config.get('routes', 'idealista')
     income_path = config.get('routes', 'income_opendata')
     price_path = config.get('routes', 'opendatabcn-price')
-    # Hbase tables
-    idealista_table_name = config.get('hbase', 'idealista_table')
-    income_table_name = config.get('hbase', 'income_table')
-    price_table_name = config.get('hbase', 'price_table')
-    district_table_name = config.get('hbase', 'district_table')
-    neighborhood_table_name = config.get('hbase', 'neighborhood_table')
-
-    # Connect to HBase
-    connection = happybase.Connection(host=host, port=9090)
-    connection.open()
 
     # Set Spark
     os.environ["HADOOP_HOME"] = hadoop_home
@@ -175,7 +154,6 @@ if __name__ == '__main__':
     lookup_di_re = spark.read.json(f"{lookup_path}/rent_lookup_district.json").rdd.map(lambda r: r.asDict()).cache()
     lookup_ne_re = spark.read.json(f"{lookup_path}/rent_lookup_neighborhood.json").rdd.map(lambda r: r.asDict()).cache()
 
-    # idealista = spark.read.parquet(f"{idealista_path}/**/*").rdd.map(lambda r: r.asDict()).cache() # Reads all but does not add the date
     idealista = readIdealista(spark, idealista_path)
 
     # Parameters structure
@@ -185,6 +163,7 @@ if __name__ == '__main__':
     # - dist_info_cols: column names that contain the district infor that will be replaced by the global id
     # - neig_col_name: column name that contains the neighborhood info to match in the main table (e.g. Idealista,Income, etc.)
     # - neig_info_cols: column names that contain the neighborhood infor that will be replaced by the global id
+    # - tuple_order: schema definition
 
     params_idealista = {
         "lu_dist_cols": ["di", "di_n", "di_re"],
@@ -192,14 +171,21 @@ if __name__ == '__main__':
         "dist_col_name": "district",
         "dist_info_cols": [],
         "neig_col_name": "neighborhood",
-        "neig_info_cols": []}
+        "neig_info_cols": [],
+        "tuple_order": IDEALISTA_SCHEMA}
 
-    idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista)
+    idealista_rec = reconciliateDistNeig(idealista, lookup_di_re, lookup_ne_re, params_idealista, None)
+
     # Drops duplicates
-    idealista_rec = dropDuplicates(idealista_rec)
-    # Insert to hbase
-    insertToHBase(connection, idealista_table_name, idealista_rec)
+    idealista_rec = idealista_rec.distinct()
 
+    idealista_hdfs_path = config.get('hdfs_formatted', 'idealista')
+    # output_directory = "../output/idealista"
+    output_directory = f"hdfs://{host}:27000/{idealista_hdfs_path}"
+    idealista_df = spark.createDataFrame(idealista_rec,
+                                         IDEALISTA_SCHEMA)
+
+    idealista_df.write.mode("overwrite").parquet(output_directory)
 
     # Reconciliate date with OpenData Lookup Tables
 
@@ -207,7 +193,7 @@ if __name__ == '__main__':
     lookup_ne_od = spark.read.json(f"{lookup_path}/income_lookup_neighborhood.json").rdd.map(
         lambda r: r.asDict()).cache()
 
-    # # Income x Neighborhood
+    # Income x Neighborhood
 
     income = spark.read.json(income_path).rdd.map(lambda r: r.asDict()).cache()
 
@@ -217,19 +203,22 @@ if __name__ == '__main__':
         "dist_col_name": "district_name",
         "dist_info_cols": ['district_id'],
         "neig_col_name": "neigh_name ",
-        "neig_info_cols": ['_id']}
+        "neig_info_cols": ['_id'],
+        "tuple_order" : INCOME_SCHEMA
+    }
 
-    income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income)
-
-    # To unfold each element of the income table
-    unfolded_income_rec = income_rec.flatMap(lambda row: [
-        {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
-         'idNeighborhood': row['idNeighborhood']} for info in row['info']])
+    income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income, income_fold)
 
     # Drops duplicates
-    unfolded_income_rec = dropDuplicates(unfolded_income_rec)
-    # Insert to hbase
-    insertToHBase(connection, income_table_name, unfolded_income_rec)
+    idealista_rec = income_rec.distinct()
+
+    income_hdfs_path = config.get('hdfs_formatted', 'income')
+    # output_directory = "../output/income"
+    output_directory = f"hdfs://{host}:27000/{income_hdfs_path}"
+    income_df = spark.createDataFrame(income_rec,
+                                      INCOME_SCHEMA)
+
+    income_df.write.mode("overwrite").parquet(output_directory)
 
     # Price
 
@@ -241,42 +230,40 @@ if __name__ == '__main__':
         "dist_col_name": "Nom_Districte",
         "dist_info_cols": ['Codi_Districte'],
         "neig_col_name": "Nom_Barri",
-        "neig_info_cols": ['Codi_Barri']}
+        "neig_info_cols": ['Codi_Barri'],
+        "tuple_order": PRICE_SCHEMA,
+    }
 
-    price_rec = reconciliateDistNeig(price, lookup_di_od, lookup_ne_od, params_price)
-
-    # Fold the different prices into one row as columns
-    fold_price_rec = price_rec.map(lambda x: (
-        (x['Any'], x['Nom_Districte'], x['Nom_Barri'], x['idDistrict'], x['idNeighborhood']),
-        [(x['Preu_mitja_habitatge'], x['Valor'])])) \
-        .reduceByKey(lambda x, y: x + y)
-
-    fold_price_rec = fold_price_rec.map(lambda x: {
-        'Any': x[0][0],
-        'Nom_Districte': x[0][1],
-        'Nom_Barri': x[0][2],
-        'idDistrict': x[0][3],
-        'idNeighborhood': x[0][4],
-        **dict(x[1])
-    })
+    price_rec = reconciliateDistNeig(price, lookup_di_od, lookup_ne_od, params_price, price_fold)
 
     # Drops duplicates
-    fold_price_rec = dropDuplicates(fold_price_rec)
-    # Insert to hbase
-    insertToHBase(connection, price_table_name, fold_price_rec)
+    price_rec = price_rec.distinct()
 
-    # # Create the Lookup tables of the database
+    price_hdfs_path = config.get('hdfs_formatted', 'price')
+    # output_directory = "../output/price"
+    output_directory = f"hdfs://{host}:27000/{price_hdfs_path}"
+    price_df = spark.createDataFrame(price_rec,
+                                      PRICE_SCHEMA)
+
+    price_df.write.mode("overwrite").parquet(output_directory)
+
+
+    # Create the Lookup tables of the database
 
     # District
     district = lookup_di_re.map(lambda r: (r["_id"], r["di"])).union(
         lookup_di_od.map(lambda r: (r["_id"], r["district"]))).reduceByKey(lambda a, b: a).map(
-        lambda r: {"_id": r[0], "name": r[1]})
+        lambda r: (r[0], r[1]))
     # Drops duplicates
-    district = dropDuplicates(district)
+    district = district.distinct()
 
+    district_hdfs_path = config.get('hdfs_formatted', 'district')
+    # output_directory = "../output/district"
+    output_directory = f"hdfs://{host}:27000/{district_hdfs_path}"
+    district_df = spark.createDataFrame(district,
+                                      DISTRICT_SCHEMA)
 
-    #Insert to hbase
-    insertToHBase(connection, district_table_name, district)
+    district_df.write.mode("overwrite").parquet(output_directory)
 
     # Neighbour
     neigh_x_dist = lookup_di_re.union(lookup_di_od).flatMap(
@@ -284,15 +271,17 @@ if __name__ == '__main__':
 
     neighborhood = lookup_ne_re.map(lambda r: (r["_id"], r["ne"])).union(
         lookup_ne_od.map(lambda r: (r["_id"], r["neighborhood"]))).reduceByKey(lambda a, b: a).join(neigh_x_dist).map(
-        lambda r: {"_id": r[0], "name": r[1][0], "idDistrict": r[1][1]})
+        lambda r: (r[0], r[1][0], r[1][1]))
 
     # Drops duplicates
-    neighborhood = dropDuplicates(neighborhood)
-    # Insert to hbase
-    insertToHBase(connection, neighborhood_table_name, neighborhood)
+    neighborhood = neighborhood.distinct()
 
-    # Delete possible duplicates generated while inserting
-    deleteDuplicatesHBase(connection)
+    neighborhood_hdfs_path = config.get('hdfs_formatted', 'neighborhood')
+    # output_directory = "../output/neighborhood"
+    output_directory = f"hdfs://{host}:27000/{neighborhood_hdfs_path}"
+    neighborhood_df = spark.createDataFrame(neighborhood,
+                                        NEIGHBORHOOD_SCHEMA)
 
-    connection.close()
+    neighborhood_df.write.mode("overwrite").parquet(output_directory)
+
     spark.stop()
