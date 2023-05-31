@@ -91,7 +91,7 @@ def reconciliateDistNeig(main_table, lookup_district, lookup_neigh, params, fina
     return table_rec
 
 
-def income_fold(income_rec):
+def income_unfold(income_rec):
     # To unfold each element of the income table
     return income_rec.flatMap(lambda row: [
         {'RFD': info["RFD"], 'pop': info["pop"], 'year': info["year"], 'idDistrict': row['idDistrict'],
@@ -207,7 +207,7 @@ if __name__ == '__main__':
         "tuple_order" : INCOME_SCHEMA
     }
 
-    income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income, income_fold)
+    income_rec = reconciliateDistNeig(income, lookup_di_od, lookup_ne_od, params_income, income_unfold)
 
     # Drops duplicates
     idealista_rec = income_rec.distinct()
